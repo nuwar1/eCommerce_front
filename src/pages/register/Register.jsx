@@ -25,7 +25,7 @@ export default function Register() {
           <TextField label="Phone Number" {...register('phoneNumber')} variant="outlined" />
           <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt:2}}>
             <Button variant='contained' type="submit" fullWidth size='large' sx={{
-              py: 4,
+              py: 3,
               fontSize: "1.4rem",
               backgroundColor: "#000",
               color: "#fff",
@@ -34,7 +34,7 @@ export default function Register() {
               },
             }}>Create Account</Button>
             <Button component={Link} to="/auth/login" variant='outlined' fullWidth size='large' sx={{
-              py: 4,
+              py: 3,
               fontSize: "1.4rem",
               borderColor: "#000",
               color: "#000",

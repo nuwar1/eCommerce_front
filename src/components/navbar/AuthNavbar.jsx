@@ -12,7 +12,7 @@ import { Link } from '@mui/material';
 export default function AuthNavbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{backgroundColor:"#fff", color:"#000"}}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             KAShop
