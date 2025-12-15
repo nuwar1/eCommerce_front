@@ -3,10 +3,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
-
+import { yupResolver } from '@hookform/resolvers/yup'
+import { RegisterSchema } from '../../validations/RegisterSchema'
 
 export default function Register() {
-  const {register,handleSubmit} = useForm({})
+  const {register,handleSubmit, formState: { errors }} = useForm({
+     resolver: yupResolver(RegisterSchema),
+     mode: "onBlur"
+  })
   const registerForm = async(values)=>{
     try{
       const response = await axios.post("https://knowledgeshop.runasp.net/api/Auth/Account/Register",values);
@@ -18,11 +22,11 @@ export default function Register() {
       <Box className="register-form">
         <Typography variant='h3' component="h1" sx={{ textAlign: "center", mt: 5 }}>Create Account</Typography>
         <Box onSubmit={handleSubmit(registerForm)} component={"form"} sx={{ display: "flex", flexDirection: "column", gap: 3, mt: 5 }}>
-          <TextField label="User Name" {...register('userName')} variant="outlined" />
-          <TextField label="Full Name" {...register('fullName')} variant="outlined" />
-          <TextField label="Email" {...register('email')} variant="outlined" />
-          <TextField label="Password" {...register('password')} variant="outlined" />
-          <TextField label="Phone Number" {...register('phoneNumber')} variant="outlined" />
+          <TextField label="Username" {...register('userName')} variant="outlined" error={errors.userName} helperText={errors.userName?.message}/>
+          <TextField label="Full Name" {...register('fullName')} variant="outlined" error={errors.fullName} helperText={errors.fullName?.message}/>
+          <TextField label="Email" {...register('email')} variant="outlined" error={errors.email} helperText={errors.email?.message}/>
+          <TextField label="Password" {...register('password')} variant="outlined" error={errors.password} helperText={errors.password?.message}/>
+          <TextField label="Phone Number" {...register('phoneNumber')} variant="outlined" error={errors.phoneNumber} helperText={errors.phoneNumber?.message}/>
           <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt:2}}>
             <Button variant='contained' type="submit" fullWidth size='large' sx={{
               py: 3,
