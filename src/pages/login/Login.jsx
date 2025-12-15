@@ -23,7 +23,7 @@ export default function Login() {
         <Box onSubmit={handleSubmit(LoginForm)} component={"form"} sx={{ display: "flex", flexDirection: "column", gap: 3, mt: 5 }}>
           <TextField label="Email" {...register('email')} variant="outlined" />
           <TextField label="Password" {...register('password')} variant="outlined" />
-          <Link component={RouterLink} to="" sx={{
+          <Link component={RouterLink} to="/auth/send-code/" sx={{
             color: "#000", textDecorationColor: "#000",
             "&:hover": {
               color: "#d52345ff",
