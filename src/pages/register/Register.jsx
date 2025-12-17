@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { RegisterSchema } from '../../validations/RegisterSchema'
 import { useState } from 'react'
 import { red } from '@mui/material/colors'
+import axiosInstance from '../../API/axiosInstance'
 
 export default function Register() {
   const [serverErrors,setServerErrors] = useState([]);
@@ -16,7 +17,7 @@ export default function Register() {
   })
   const registerForm = async(values)=>{
     try{
-      const response = await axios.post("https://knowledgeshop.runasp.net/api/Auth/Account/Register",values);
+      const response = await axiosInstance.post("/Auth/Account/Register",values);
     }catch(err){
       setServerErrors(err.response.data.errors);
     }

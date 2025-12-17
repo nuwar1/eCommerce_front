@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ResetPasswordSchema } from "../../validations/ResetPasswordSchema";
 import { Snackbar, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../API/axiosInstance";
 
 
 export default function ResetPassword() {
@@ -21,7 +22,7 @@ export default function ResetPassword() {
 
   const resetPasswordForm = async (values) => {
     try {
-      const response = await axios.patch("https://knowledgeshop.runasp.net/api/Auth/Account/ResetPassword", values);
+      const response = await axiosInstance.patch("/Auth/Account/ResetPassword", values);
       setSuccess(true);
       setTimeout(() => {
       navigate("/auth/login");

@@ -4,12 +4,13 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Link } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
+import axiosInstance from '../../API/axiosInstance';
 
 export default function Login() {
   const { register, handleSubmit } = useForm({})
   const LoginForm = async (values) => {
     try {
-      const response = await axios.post("https://knowledgeshop.runasp.net/api/Auth/Account/Login", values);
+      const response = await axiosInstance.post("/api/Auth/Account/Login", values);
       if(response.status === 200){
         localStorage.setItem("token",response.data.accessToken);
       }

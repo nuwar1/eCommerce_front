@@ -6,6 +6,7 @@ import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../API/axiosInstance";
 
 
 const SendCodeSchema = yup.object({
@@ -25,7 +26,7 @@ export default function SendCode() {
   const sendCodeForm = async (values) => {
     setServerErrors([]);
     try {
-      await axios.post("https://knowledgeshop.runasp.net/api/Auth/Account/SendCode", values);
+      await axiosInstance.post("/Auth/Account/SendCode", values);
       navigate("/auth/reset-password")
     } catch (err) {
       setServerErrors(err.response.data.message);
