@@ -3,19 +3,13 @@ import React from 'react'
 import { Link as RouterLink } from 'react-router-dom';
 import { Link } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import axios from 'axios'
-import axiosInstance from '../../API/axiosInstance';
+import useLogin from '../../hooks/useLogin';
 
 export default function Login() {
   const { register, handleSubmit } = useForm({})
+  const {loginMutation, serverErrors} = useLogin();
   const LoginForm = async (values) => {
-    try {
-      const response = await axiosInstance.post("/api/Auth/Account/Login", values);
-      if(response.status === 200){
-        localStorage.setItem("token",response.data.accessToken);
-      }
-    } catch (err) {
-    }
+    loginMutation.mutateAsync(values);
   }
   return (
     <Container maxWidth="md">

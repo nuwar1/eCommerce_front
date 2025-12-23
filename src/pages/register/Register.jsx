@@ -2,26 +2,21 @@ import { Box, Typography, TextField, Button, Container, CircularProgress } from 
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { RegisterSchema } from '../../validations/RegisterSchema'
-import { useState } from 'react'
-import { red } from '@mui/material/colors'
-import axiosInstance from '../../API/axiosInstance'
+import useRegister from '../../hooks/useRegister'
 
 export default function Register() {
-  const [serverErrors,setServerErrors] = useState([]);
+
   const {register,handleSubmit, formState: { errors, isSubmitting }} = useForm({
      resolver: yupResolver(RegisterSchema),
      mode: "onBlur"
   })
+  const {registerMutation, serverErrors} = useRegister();
   const registerForm = async(values)=>{
-    try{
-      const response = await axiosInstance.post("/Auth/Account/Register",values);
-    }catch(err){
-      setServerErrors(err.response.data.errors);
-    }
+    registerMutation.mutateAsync(values);
   }
+
   return (
     <Container maxWidth="md">
       <Box className="register-form">

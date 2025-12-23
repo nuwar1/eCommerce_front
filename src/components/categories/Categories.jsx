@@ -2,19 +2,10 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../API/axiosInstance";
 import { Paper, List, ListItemButton, ListItemText, Box, Typography, CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+import { useCategories } from "../../hooks/useCategories";
 
 export default function Categories() {
-
-  const fetchCategories = async()=>{
-      const response = await axiosInstance.get("/Categories");
-      return response.data;
-    }
-  const {isLoading, isError, data} = useQuery({
-    queryKey: ["categories"],
-    staleTime:5*60*1000,
-    queryFn: fetchCategories
-  })
-
+  const {isLoading, isError, data} = useCategories();
   if (isLoading) return <CircularProgress/>
   if(isError) return <Typography>error</Typography>
 

@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { Box, Typography, TextField, Button, Container, CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../API/axiosInstance";
+import useSendCode from "../../hooks/useSendCode";
 
 
 const SendCodeSchema = yup.object({
@@ -14,23 +12,16 @@ const SendCodeSchema = yup.object({
 });
 
 export default function SendCode() {
-  const navigate = useNavigate();
-  const [serverErrors, setServerErrors] = useState([]);
+  const { serverErrors, sendCodeMutation } = useSendCode();
 
-  const {register, handleSubmit,
-    formState: { errors, isSubmitting }} = useForm({
-    resolver: yupResolver(SendCodeSchema),
-    mode: "onBlur",
-  });
+  const { register, handleSubmit,
+    formState: { errors, isSubmitting } } = useForm({
+      resolver: yupResolver(SendCodeSchema),
+      mode: "onBlur",
+    });
 
   const sendCodeForm = async (values) => {
-    setServerErrors([]);
-    try {
-      await axiosInstance.post("/Auth/Account/SendCode", values);
-      navigate("/auth/reset-password")
-    } catch (err) {
-      setServerErrors(err.response.data.message);
-    }
+    sendCodeMutation.mutateAsync(values);
   };
 
   return (
@@ -41,17 +32,17 @@ export default function SendCode() {
         </Typography>
 
         {serverErrors.length > 0 ? serverErrors.map((err) => (
-              <Typography sx={{ color: "red", mt: 2 }}>
-                {err}
-              </Typography>))
+          <Typography sx={{ color: "red", mt: 2 }}>
+            {err}
+          </Typography>))
           : null}
 
         <Box onSubmit={handleSubmit(sendCodeForm)} component={"form"}
           sx={{ display: "flex", flexDirection: "column", gap: 3, mt: 5 }}>
           <TextField label="Email" {...register("email")} variant="outlined"
-            error={errors.email} helperText={errors.email?.message}/>
+            error={errors.email} helperText={errors.email?.message} />
 
-          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", alignItems:"center", mt: 2 }}>
+          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", alignItems: "center", mt: 2 }}>
             <Button variant="contained" type="submit" disabled={isSubmitting} fullWidth
               size="large" sx={{
                 py: 3,
@@ -60,17 +51,18 @@ export default function SendCode() {
                 color: "#fff",
                 "&:hover": { backgroundColor: "#d52345" },
               }}>
-              {isSubmitting ? <CircularProgress/> : "Send Code"}
+              {isSubmitting ? <CircularProgress /> : "Send Code"}
             </Button>
 
             <Button component={Link} to="/auth/login" fullWidth sx={{
-                py: 3,
-                fontSize: "1.4rem",
-                color: "#666060ff",
-                textDecoration: "underline",
-                "&:hover": {
-                  color: "#d52345"},
-              }}>Cancel</Button>
+              py: 3,
+              fontSize: "1.4rem",
+              color: "#666060ff",
+              textDecoration: "underline",
+              "&:hover": {
+                color: "#d52345"
+              },
+            }}>Cancel</Button>
           </Box>
         </Box>
       </Box>

@@ -2,34 +2,21 @@ import React, { useState } from "react";
 import { Box, Typography, TextField, Button, Container, CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ResetPasswordSchema } from "../../validations/ResetPasswordSchema";
 import { Snackbar, Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../API/axiosInstance";
+import useResetPassword from "../../hooks/useResetPassword";
 
 
 export default function ResetPassword() {
-  const [serverErrors, setServerErrors] = useState([]);
+  const { serverErrors, success, setSuccess, resetPasswordMutation } = useResetPassword();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: yupResolver(ResetPasswordSchema),
     mode: "onBlur"
   });
 
-  const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
-
   const resetPasswordForm = async (values) => {
-    try {
-      const response = await axiosInstance.patch("/Auth/Account/ResetPassword", values);
-      setSuccess(true);
-      setTimeout(() => {
-      navigate("/auth/login");
-    }, 2000);
-    } catch (err) {
-      setServerErrors(err.response.data.errors);
-    }
+    resetPasswordMutation.mutateAsync(values);
   };
 
   return (
