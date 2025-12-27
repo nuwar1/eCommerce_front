@@ -16,7 +16,7 @@ export default function ResetPassword() {
   });
 
   const resetPasswordForm = async (values) => {
-    resetPasswordMutation.mutateAsync(values);
+    await resetPasswordMutation.mutateAsync(values);
   };
 
   return (

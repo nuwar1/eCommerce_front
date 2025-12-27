@@ -14,7 +14,7 @@ export default function Register() {
   })
   const {registerMutation, serverErrors} = useRegister();
   const registerForm = async(values)=>{
-    registerMutation.mutateAsync(values);
+    await registerMutation.mutateAsync(values);
   }
 
   return (

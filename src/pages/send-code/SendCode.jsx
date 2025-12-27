@@ -21,7 +21,7 @@ export default function SendCode() {
     });
 
   const sendCodeForm = async (values) => {
-    sendCodeMutation.mutateAsync(values);
+    await sendCodeMutation.mutateAsync(values);
   };
 
   return (

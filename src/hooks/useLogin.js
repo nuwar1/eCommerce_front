@@ -8,7 +8,7 @@ export default function useLogin() {
     const navigate = useNavigate();
     const loginMutation = useMutation({
         mutationFn: async (values) => {
-            return await axiosInstance.post("/api/Auth/Account/Login", values)
+            return await axiosInstance.post("/Auth/Account/Login", values)
         },
         onSuccess: (res) => {
             const token = res?.data?.accessToken;
@@ -16,8 +16,14 @@ export default function useLogin() {
             navigate("/");
         },
         onError: (err) => {
-            setServerErrors(err.response.data.errors);
+            const data = err?.response?.data;
+            const message = data?.message;
+            const errors = data?.errors;
+
+            if (Array.isArray(errors) && errors.length) setServerErrors(errors);
+            else if (message) setServerErrors([message]);
+            else setServerErrors(["Login failed"]);
         }
     });
-    return { serverErrors, loginMutation };
+return { serverErrors, loginMutation };
 }

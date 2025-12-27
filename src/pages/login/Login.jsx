@@ -7,12 +7,18 @@ import useLogin from '../../hooks/useLogin';
 
 export default function Login() {
   const { register, handleSubmit } = useForm({})
-  const {loginMutation, serverErrors} = useLogin();
+  const { loginMutation, serverErrors } = useLogin();
   const LoginForm = async (values) => {
-    loginMutation.mutateAsync(values);
+    await loginMutation.mutateAsync(values);
   }
   return (
     <Container maxWidth="md">
+      {serverErrors?.length > 0 &&
+        serverErrors.map((error, i) => (
+          <Typography key={i} sx={{ color: "red", mt: 2 }}>
+            {error}
+          </Typography>
+        ))}
       <Box className="register-form">
         <Typography variant='h3' component="h1" sx={{ textAlign: "center", mt: 5 }}>Sign In</Typography>
         <Box onSubmit={handleSubmit(LoginForm)} component={"form"} sx={{ display: "flex", flexDirection: "column", gap: 3, mt: 5 }}>
@@ -22,8 +28,10 @@ export default function Login() {
             color: "#000", textDecorationColor: "#000",
             "&:hover": {
               color: "#d52345ff",
-              textDecorationColor: "#d52345",}}}>Forgot your password?</Link>
-          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt: 2}}>
+              textDecorationColor: "#d52345",
+            }
+          }}>Forgot your password?</Link>
+          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt: 2 }}>
             <Button variant='contained' type="submit" fullWidth size='large' sx={{
               py: 3,
               fontSize: "1.4rem",
@@ -31,7 +39,8 @@ export default function Login() {
               color: "#fff",
               "&:hover": {
                 backgroundColor: "#d52345",
-              }}}>Sign In</Button>
+              }
+            }} disabled={loginMutation.isPending}>Sign In</Button>
             <Button component={RouterLink} to="/auth/register" variant='outlined' fullWidth size='large' sx={{
               py: 3,
               fontSize: "1.4rem",
