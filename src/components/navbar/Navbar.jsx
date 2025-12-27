@@ -1,16 +1,16 @@
 import React from "react";
 import {
   AppBar, Toolbar, Box, Container, Typography, IconButton, Badge, Button,
-  Menu, MenuItem, Divider, InputBase, ListItemIcon
+  Menu, MenuItem, InputBase,
 } from "@mui/material";
-import { styled, alpha } from "@mui/material/styles";
+import { styled} from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link as RouterLink } from "react-router-dom";
-import { Margin } from "@mui/icons-material";
 
 const SearchWrap = styled("div")(({ theme }) => ({
   display: "flex",
@@ -40,7 +40,7 @@ const navLinkSx = {
   color: "rgba(255,255,255,0.85)",
   textDecoration: "none",
   fontWeight: 600,
-  fontSize: 14,
+  fontSize: 16,
   px: 2,
   py: 1,
   borderRadius: 1,
@@ -108,7 +108,7 @@ export default function Navbar() {
                 sx={{
                   color: "#fff", textTransform: "none", fontWeight: 600, gap: 0.5, "&:hover": {
                     color: "#e11d48",
-                    backgroundColor: "transparent"
+                    backgroundColor: "transparent", 
                   },
                 }}
                 startIcon={
@@ -149,7 +149,7 @@ export default function Navbar() {
                       },
                     }}
                   >
-                    <FavoriteBorderIcon />
+                    <ShoppingCartOutlinedIcon />
                   </Badge>
                 }
               >
@@ -163,7 +163,7 @@ export default function Navbar() {
       <Box sx={{ bgcolor: "#111827", color: "#fff" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ minHeight: 56, display: "flex", gap: 2 }}>
-            <Box sx={{ minWidth: 260 }}>
+            <Box sx={{ minWidth: 300 }}>
               <Button
                 startIcon={<GridViewOutlinedIcon />}
                 sx={{
@@ -184,14 +184,14 @@ export default function Navbar() {
               </Button>
             </Box>
 
-            <Box sx={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}>
+            <Box sx={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 2}}>
               <Box component={RouterLink} to="/home" sx={{ ...navLinkSx, color: "#e11d48" }}>
                 Home
               </Box>
-              <Box component={RouterLink} to="/shop" sx={navLinkSx}>
+              <Box component={RouterLink} to="/products" sx={navLinkSx}>
                 Shop
               </Box>
-              <Box component={RouterLink} to="/products" sx={navLinkSx}>
+              <Box component={RouterLink} to="/product" sx={navLinkSx}>
                 Product
               </Box>
               <Box component={RouterLink} to="/pages" sx={navLinkSx}>

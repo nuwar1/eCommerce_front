@@ -7,23 +7,42 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register"
 import ResetPassword from "./pages/reset/ResetPassword";
 import SendCode from "./pages/send-code/SendCode";
+import ShopLayout from "./layout/ShopLayout";
+import ProductDetails from "./pages/product-details/ProductDetails";
+import Products from "./pages/products/products";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
         children: [
-            {   index: true, 
-                element: <Home /> },
+            {
+                index: true,
+                element: <Home />
+            },
             {
                 path: "home",
                 element: <Home />
             },
+        ]
+    },
+    {
+        path: "/",
+        element: <ShopLayout />,
+        children: [
             {
                 path: "cart",
                 element: <Cart />
-            }
-        ]
+            },
+            {
+                path: "product",
+                element: <ProductDetails />
+            },
+            {
+                path: "products",
+                element: <Products />
+            },
+        ],
     },
     {
         path: "/auth",

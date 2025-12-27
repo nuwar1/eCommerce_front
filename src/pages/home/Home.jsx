@@ -8,7 +8,7 @@ export default function Home() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "260px 1fr" },
+          gridTemplateColumns: { xs: "1fr", md: "300px 1fr" },
           gap: 3,
           alignItems: "start",
         }}
