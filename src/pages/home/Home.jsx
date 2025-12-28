@@ -1,6 +1,7 @@
 import React from "react";
 import Categories from "../../components/categories/Categories";
-import { Box, Container, Paper } from "@mui/material";
+import { Box, Container } from "@mui/material";
+import HeroCarousel from "../../components/hero/HeroCarousel";
 
 export default function Home() {
   return (
@@ -16,18 +17,11 @@ export default function Home() {
         <Box>
           <Categories />
         </Box>
-        <Paper
-          elevation={0}
-          sx={{
-            mt: 3,
-            border: "1px solid #e5e7eb",
-            borderRadius: 2,
-            minHeight: 460,
-            bgcolor: "#bfe7ea",
-          }}
-        >
-        </Paper>
+
+        <Box sx={{ mt: 3 }}>
+          <HeroCarousel />
+        </Box>
       </Box>
     </Container>
-  )
+  );
 }

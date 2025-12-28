@@ -9,7 +9,7 @@ import ResetPassword from "./pages/reset/ResetPassword";
 import SendCode from "./pages/send-code/SendCode";
 import ShopLayout from "./layout/ShopLayout";
 import ProductDetails from "./pages/product-details/ProductDetails";
-import Products from "./pages/products/products";
+import Products from "./pages/products/Products";
 
 const router = createBrowserRouter([
     {
