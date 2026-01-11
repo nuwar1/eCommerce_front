@@ -18,12 +18,24 @@ export default function AuthNavbar() {
             KAShop
           </Typography>
           <Box sx={{display:"flex", gap:2}}>
-            <Link component={RouterLink} to="/home" color='inherit' underline='none'>Home</Link>
-            <Link component={RouterLink} to="" color='inherit' underline='none'>Shop</Link>
-            <Link component={RouterLink} to="" color='inherit' underline='none'>Product</Link>
-            <Link component={RouterLink} to="" color='inherit' underline='none'>Pages</Link>
-            <Link component={RouterLink} to="" color='inherit' underline='none'>Blog</Link>
-            <Link component={RouterLink} to="" color='inherit' underline='none'>Contact</Link>
+            <Link component={RouterLink} to="/home" color='inherit' underline='none' sx={{
+                "&:hover": { color: "#e11d48" },
+              }}>Home</Link>
+            <Link component={RouterLink} to="" color='inherit' underline='none' sx={{
+                "&:hover": { color: "#e11d48" },
+              }}>Shop</Link>
+            <Link component={RouterLink} to="" color='inherit' underline='none' sx={{
+                "&:hover": { color: "#e11d48" },
+              }}>Product</Link>
+            <Link component={RouterLink} to="" color='inherit' underline='none' sx={{
+                "&:hover": { color: "#e11d48" },
+              }}>Pages</Link>
+            <Link component={RouterLink} to="" color='inherit' underline='none' sx={{
+                "&:hover": { color: "#e11d48" },
+              }}>Blog</Link>
+            <Link component={RouterLink} to="" color='inherit' underline='none' sx={{
+                "&:hover": { color: "#e11d48" },
+              }}>Contact</Link>
           </Box>
 
         </Toolbar>

@@ -3,14 +3,15 @@ import {
   AppBar, Toolbar, Box, Container, Typography, IconButton, Badge, Button,
   Menu, MenuItem, InputBase,
 } from "@mui/material";
-import { styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/authStore";
 
 const SearchWrap = styled("div")(({ theme }) => ({
   display: "flex",
@@ -44,12 +45,20 @@ const navLinkSx = {
   px: 2,
   py: 1,
   borderRadius: 1,
-  "&:hover": { color: "#e11d48"},
+  "&:hover": { color: "#e11d48" },
 };
 
 export default function Navbar() {
   const [accountAnchorEl, setAccountAnchorEl] = React.useState(null);
   const isAccountOpen = Boolean(accountAnchorEl);
+  const token = useAuthStore(state => state.token);
+  const logout = useAuthStore(state => state.logout);
+  const navigate = useNavigate("");
+
+  const handleLogout = () => {
+    logout();
+    navigate("/auth/login");
+  }
 
   const handleAccountOpen = (event) => {
     setAccountAnchorEl(event.currentTarget);
@@ -108,7 +117,7 @@ export default function Navbar() {
                 sx={{
                   color: "#fff", textTransform: "none", fontWeight: 600, gap: 0.5, "&:hover": {
                     color: "#e11d48",
-                    backgroundColor: "transparent", 
+                    backgroundColor: "transparent",
                   },
                 }}
                 startIcon={
@@ -159,7 +168,7 @@ export default function Navbar() {
           </Toolbar>
         </Container>
       </Box>
-    
+
       <Box sx={{ bgcolor: "#111827", color: "#fff" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ minHeight: 56, display: "flex", gap: 2 }}>
@@ -184,7 +193,7 @@ export default function Navbar() {
               </Button>
             </Box>
 
-            <Box sx={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 2}}>
+            <Box sx={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
               <Box component={RouterLink} to="/home" sx={{ ...navLinkSx, color: "#e11d48" }}>
                 Home
               </Box>
@@ -213,7 +222,7 @@ export default function Navbar() {
                 color: "#fff",
                 textTransform: "none",
                 fontWeight: 800,
-                "&:hover": {color:"#e11d48"},
+                "&:hover": { color: "#e11d48" },
               }}
             >
               Shop today’s deal
@@ -226,14 +235,21 @@ export default function Navbar() {
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             transformOrigin={{ vertical: "top", horizontal: "right" }}
           >
-            <MenuItem
-              component={RouterLink}
-              to="/auth/login"
-              onClick={handleAccountClose}
-            >
-              Login
-            </MenuItem>
-
+            {token != null ?
+              <MenuItem color="inherit"
+                onClick={() => {
+                  handleAccountClose();
+                  handleLogout();
+                }}>
+                Logout
+              </MenuItem>
+              : <MenuItem
+                component={RouterLink}
+                to="/auth/login"
+                onClick={handleAccountClose}
+              >
+                Login
+              </MenuItem>}
             <MenuItem
               component={RouterLink}
               to="/auth/register"

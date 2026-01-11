@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, {useState } from "react";
 import {
   Box,
   Container,
@@ -8,11 +8,9 @@ import {
   IconButton,
   Divider,
   Paper,
-  Chip,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import BoltIcon from "@mui/icons-material/Bolt";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 export default function ProductDetails() {
