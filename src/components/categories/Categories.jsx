@@ -15,12 +15,11 @@ export default function Categories() {
       sx={{
         bgcolor: "#fff",
         border: "1px solid #e5e7eb",
-        borderTop: 1,
         borderRadius: "0 0 12px 12px",
         overflow: "hidden",
       }}
     >
-      <List disablePadding>
+      <List disablePadding sx={{ m: 0, p: 0 }}>
         {data.map((category) => (
           <ListItemButton
             key={category.id}

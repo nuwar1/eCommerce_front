@@ -42,12 +42,12 @@ export default function ResetPassword() {
           <TextField label="New Password" {...register("newPassword")} variant="outlined"
             error={errors.newPassword} helperText={errors.newPassword?.message} />
 
-          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt: 2 }}>
+          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt: 2,  gap: {xs: 1.5, sm: 2, md: 3}}}>
             <Button variant="contained" type="submit"
               disabled={isSubmitting} fullWidth
               size="large" sx={{
                 py: 3,
-                fontSize: "1.4rem",
+                fontSize: {sm: 16, md: 20},
                 backgroundColor: "#000",
                 color: "#fff",
                 "&:hover": { backgroundColor: "#d52345" },
@@ -58,7 +58,7 @@ export default function ResetPassword() {
               fullWidth size="large"
               sx={{
                 py: 3,
-                fontSize: "1.4rem",
+                fontSize: {sm: 16, md: 20},
                 borderColor: "#000",
                 color: "#000",
                 "&:hover": {

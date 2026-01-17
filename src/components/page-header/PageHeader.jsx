@@ -5,7 +5,8 @@ export default function PageHeader({ title, crumbs }) {
   return (
     <Box
       sx={{
-        py: 10,
+        py: { xs: 4, sm: 6, md: 10 },     
+        px: { xs: 2, sm: 3, md: 0 },    
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -18,6 +19,7 @@ export default function PageHeader({ title, crumbs }) {
         sx={{
           fontWeight: 400,
           mb: 1.5,
+          fontSize: { xs: 28, sm: 36, md: 48 },         
         }}
       >
         {title}
@@ -35,6 +37,7 @@ export default function PageHeader({ title, crumbs }) {
               underline="none"
               sx={{
                 color: "#000",
+                fontSize: { xs: 14, sm: 15, md: 16 },
                 "&:hover":{
                     color: "#e11d48",
                     textDecoration:"none"
@@ -44,7 +47,10 @@ export default function PageHeader({ title, crumbs }) {
               {crumb.label}
             </Link>
           ) : (
-            <Typography key={index} color="text.primary">
+            <Typography key={index} color="text.primary"
+            sx={{
+                fontSize: { xs: 14, sm: 15, md: 16 },
+              }}>
               {crumb.label}
             </Typography>
           )

@@ -9,16 +9,21 @@ export default function Home() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "300px 1fr" },
+          gridTemplateColumns: {
+            xs: "1fr",
+            md: "240px 1fr",  
+            lg: "280px 1fr",
+            xl: "300px 1fr",  
+          },
           gap: 3,
           alignItems: "start",
         }}
       >
-        <Box>
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
           <Categories />
         </Box>
 
-        <Box sx={{ mt: 3 }}>
+        <Box sx={{ mt: { xs: 2, md: 3 } }}>
           <HeroCarousel />
         </Box>
       </Box>

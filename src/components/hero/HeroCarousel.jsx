@@ -82,7 +82,7 @@ export default function HeroCarousel() {
         overflow: "hidden",
         borderRadius: 2,
         border: "1px solid #e5e7eb",
-        minHeight: 500,
+        minHeight: { xs: 200, sm: 250, md: 300 },
         width: "100%",
         backgroundImage: `url(${active.image})`,
         backgroundSize: "cover",
@@ -97,7 +97,7 @@ export default function HeroCarousel() {
           position: "absolute",
           bottom: 16,
           right: 16,
-          display: "flex",
+          display: { xs: "none", sm: "flex" },
           gap: 1,
           opacity: hovered ? 1 : 0,
           transform: hovered ? "translateY(0)" : "translateY(-6px)",
@@ -160,7 +160,7 @@ export default function HeroCarousel() {
                 color: "#e11d48",
                 fontWeight: 500,
                 letterSpacing: 0.4,
-                fontSize: 18,
+                fontSize: { xs: 14, sm: 16, md: 18 },
                 my: 3,
               }}
             >
@@ -170,7 +170,7 @@ export default function HeroCarousel() {
               sx={{
                 fontWeight: 900,
                 lineHeight: 1.05,
-                fontSize: { xs: 44, md: 64 },
+                fontSize: { xs: 34, sm: 44, md: 64 },
                 color: "#111827",
               }}
             >
@@ -180,7 +180,7 @@ export default function HeroCarousel() {
               sx={{
                 fontWeight: 900,
                 lineHeight: 1.05,
-                fontSize: { xs: 44, md: 64 },
+                fontSize: { xs: 34, sm: 44, md: 64 },
                 color: "#111827",
                 mb: 2,
               }}
@@ -192,7 +192,8 @@ export default function HeroCarousel() {
               sx={{
                 color: "#111827",
                 opacity: 0.85,
-                fontSize: 18,
+                fontSize: { xs: 14, sm: 16, md: 18 },
+                maxWidth: 520,
                 mb: 4,
               }}
             >
