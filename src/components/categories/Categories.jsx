@@ -20,7 +20,7 @@ export default function Categories() {
       }}
     >
       <List disablePadding sx={{ m: 0, p: 0 }}>
-        {data.map((category) => (
+        {data.response.map((category) => (
           <ListItemButton
             key={category.id}
             sx={{
