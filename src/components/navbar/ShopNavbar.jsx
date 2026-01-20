@@ -36,7 +36,6 @@ export default function ShopNavbar() {
   const navItems = [
     { label: "Home", to: "/home" },
     { label: "Shop", to: "/products" },
-    { label: "Product", to: "/product" },
     { label: "Pages", to: "/pages" },
     { label: "Blog", to: "/blog" },
     { label: "Contact", to: "/contact" },
@@ -49,7 +48,7 @@ export default function ShopNavbar() {
     <AppBar position="sticky" elevation={0}>
       <Box sx={{ bgcolor: "#fff", color: "#000", py: { xs: 2, md: 4 } }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ py: 1.5, gap: 2 }}>
+          <Toolbar disableGutters sx={{ py: 1.5, gap: 0.5 }}>
             <Box sx={{ minWidth: 160 }}>
               <Typography
                 variant="h5"

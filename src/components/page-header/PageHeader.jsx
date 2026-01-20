@@ -17,7 +17,7 @@ export default function PageHeader({ title, crumbs }) {
       <Typography
         variant="h3"
         sx={{
-          fontWeight: 400,
+          fontWeight: 600,
           mb: 1.5,
           fontSize: { xs: 28, sm: 36, md: 48 },         
         }}

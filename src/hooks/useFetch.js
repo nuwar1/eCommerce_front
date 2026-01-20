@@ -7,7 +7,7 @@ export function useFetch(queryKey, url){
       return response.data;
     }
   const query = useQuery({
-    queryKey: [queryKey],
+    queryKey,
     staleTime:5*60*1000,
     queryFn: fetchData
   })

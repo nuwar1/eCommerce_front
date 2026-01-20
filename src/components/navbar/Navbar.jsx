@@ -28,17 +28,17 @@ const SearchWrap = styled("div")(({ theme }) => ({
   borderRadius: 8,
   overflow: "hidden",
   width: "100%",
-  maxWidth: 680,
+  maxWidth: 600,
 }));
 
 const SearchInput = styled(InputBase)(({ theme }) => ({
   flex: 1,
-  padding: theme.spacing(2, 2)
+  padding: theme.spacing(1, 1)
 }));
 
 const SearchBtn = styled(IconButton)(({ theme }) => ({
   borderRadius: 8,
-  padding: theme.spacing(2, 2),
+  padding: theme.spacing(1, 1),
   backgroundColor: "#e11d48",
   color: "#fff",
   marginRight: theme.spacing(0.6),
@@ -88,7 +88,6 @@ export default function Navbar() {
   const navItems = [
     { label: "Home", to: "/home" },
     { label: "Shop", to: "/products" },
-    { label: "Product", to: "/product" },
     { label: "Pages", to: "/pages" },
     { label: "Blog", to: "/blog" },
     { label: "Contact", to: "/contact" },
@@ -299,9 +298,6 @@ export default function Navbar() {
               </Box>
               <Box component={RouterLink} to="/products" sx={navLinkSx}>
                 Shop
-              </Box>
-              <Box component={RouterLink} to="/product" sx={navLinkSx}>
-                Product
               </Box>
               <Box component={RouterLink} to="/pages" sx={navLinkSx}>
                 Pages

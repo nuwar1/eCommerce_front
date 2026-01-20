@@ -3,6 +3,7 @@ import Categories from "../../components/categories/Categories";
 import { Typography, Container, CircularProgress, Grid, Box, Card, CardMedia, CardContent } from "@mui/material";
 import HeroCarousel from "../../components/hero/HeroCarousel";
 import { useProducts } from "../../hooks/useProducts";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const { isLoading, isError, data } = useProducts();
@@ -31,42 +32,52 @@ export default function Home() {
         </Box>
       </Box>
 
-      <Box sx = {{py:5}}>
-        <Typography component={"h2"} variant={'h5'} sx={{py:3, fontWeight:500}}>Products</Typography>
-        <Grid container spacing={2} size={{ xs: 12, sm: 6, md: 5, lg: 3 }}>
+      <Box sx={{ py: 5 }}>
+        <Typography component={"h2"} variant={'h5'} sx={{ py: 3, fontWeight: 500 }}>Products</Typography>
+        <Grid container spacing={1}>
           {data.response.data.map((product) =>
-            <Card sx={{
-              border: "1px solid #e5e7eb",
-              borderRadius: 2,
-              boxShadow: "none",
-              width: 250,
-              transition: "transform 200ms ease, box-shadow 200ms ease",
-              "&:hover": {
-                transform: "translateY(-4px)",
-                borderColor: "#000"
-              },
-            }}>
-              <CardMedia
-                component="img"
-                image={product.image}
-                alt={product.title}
-                sx={{ objectFit: "contain", height: 200, p: 3 }}>
-              </CardMedia>
-              <CardContent sx={{ display: "flex-column", gap: 3, pt: 2 }}>
-                <Typography component={"h3"} sx={{
+            <Grid
+              key={product.id}
+              item
+              size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+              <Link
+                to={`/product/${product.id}`}
+                style={{ display: "block", textDecoration: "none" }}
+              >
+                <Card sx={{
+                  border: "1px solid #e5e7eb",
+                  borderRadius: 2,
+                  boxShadow: "none",
+                  width: "100%",
+                  maxWidth: { xs: "100%", sm: 280 },
+                  transition: "transform 200ms ease, box-shadow 200ms ease",
                   "&:hover": {
-                    color: "#e11d48",
-                    cursor: 'pointer'
-                  }
+                    transform: "translateY(-4px)",
+                    borderColor: "#000"
+                  },
                 }}>
-                  {product.name}
-                </Typography>
-                <Typography component={"span"}>
-                  ${product.price}
-                </Typography>
-              </CardContent>
-            </Card>)}
-
+                  <CardMedia
+                    component="img"
+                    image={product.image}
+                    alt={product.title}
+                    sx={{ objectFit: "contain", height: 200, p: 3 }}>
+                  </CardMedia>
+                  <CardContent sx={{ display: "flex-column", gap: 3, pt: 2 }}>
+                    <Typography component={"h3"} sx={{
+                      "&:hover": {
+                        color: "#e11d48",
+                        cursor: 'pointer'
+                      }
+                    }}>
+                      {product.name}
+                    </Typography>
+                    <Typography component={"span"}>
+                      ${product.price}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Grid>)}
         </Grid>
       </Box>
     </Container>

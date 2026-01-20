@@ -16,12 +16,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link as RouterLink } from "react-router-dom";
 
 const navItems = [
-  { label: "Home", to: "/home" },
-  { label: "Shop", to: "/products" },
-  { label: "Product", to: "/product" },
-  { label: "Pages", to: "/pages" },
-  { label: "Blog", to: "/blog" },
-  { label: "Contact", to: "/contact" },
+    { label: "Home", to: "/home" },
+    { label: "Shop", to: "/products" },
+    { label: "Pages", to: "/pages" },
+    { label: "Blog", to: "/blog" },
+    { label: "Contact", to: "/contact" },
 ];
 
 export default function AuthNavbar() {

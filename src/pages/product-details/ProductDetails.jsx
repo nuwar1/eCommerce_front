@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -8,26 +8,21 @@ import {
   IconButton,
   Divider,
   Paper,
+  CircularProgress, 
+  Rating
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { useParams } from "react-router-dom";
+import { useProduct } from "../../hooks/useProduct";
 
 export default function ProductDetails() {
-
-  const product = {
-    name: "T-Shirt",
-    description: "Product one description",
-    price: 200,
-    discount: 0, 
-    quantity: 200,
-    category: "Clothes",
-    images: [],
-  };
-
-  const [activeImg, setActiveImg] = useState(product.images[0]);
-  const [qty, setQty] = useState(1);
-
+  const { id } = useParams();
+  const { isLoading, isError, data } = useProduct(id);
+  if (isLoading) return <CircularProgress />
+  if (isError) return <Typography>error</Typography>
+  const product = data.response;
   const inStock = product.quantity > 0;
 
   return (
@@ -35,69 +30,39 @@ export default function ProductDetails() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "560px 1fr" },
+          gridTemplateColumns: { xs: "1fr", md: "400px 1fr" },
           gap: { xs: 3, md: 5 },
           alignItems: "start",
         }}
       >
-
-        <Box sx={{ display: "grid", gridTemplateColumns: "90px 1fr", gap: 2 }}>
-
-          <Stack spacing={2} sx={{ alignItems: "center" }}>
-            {product.images.map((img) => (
-              <Box
-                key={img}
-                onClick={() => setActiveImg(img)}
-                sx={{
-                  width: 76,
-                  height: 92,
-                  borderRadius: 1.5,
-                  cursor: "pointer",
-                  border: img === activeImg ? "2px solid #111827" : "1px solid #e5e7eb",
-                  overflow: "hidden",
-                  BoxShadow: "0 0 0 rgba(0,0,0,0)",
-                  "&:hover": { borderColor: "#111827" },
-                }}
-              >
-                <Box
-                  component="img"
-                  src={img}
-                  alt="thumb"
-                  sx={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </Box>
-            ))}
-          </Stack>
-
-          <Paper
-            elevation={0}
+        <Paper
+          elevation={0}
+          sx={{
+            border: "1px solid #e5e7eb",
+            borderRadius: 2,
+            overflow: "hidden",
+            minHeight: { xs: 340, md: 560 },
+            position: "relative",
+          }}
+        >
+          <Box
+            component="img"
+            src={product.image}
+            alt={product.name}
             sx={{
-              border: "1px solid #e5e7eb",
-              borderRadius: 2,
-              overflow: "hidden",
-              bgcolor: "#f9fafb",
-              minHeight: 560,
-              position: "relative",
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              p: { xs: 2, md: 3 },
             }}
-          >
-            <Box
-              component="img"
-              src={activeImg}
-              alt={product.name}
-              sx={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                p: 3,
-              }}
-            />
-          </Paper>
-        </Box>
-
+          />
+        </Paper>
         <Box>
-          <Typography variant="h3" sx={{ fontWeight: 700, mb: 1 }}>
+          <Typography variant="h4" sx={{ fontWeight: 600, mb: 2 }}>
             {product.name}
           </Typography>
+
+          <Rating value={product.rate} readOnly sx={{ mb: 2 }}></Rating>
 
           <Stack direction="row" spacing={1.2} alignItems="center" sx={{ mb: 2 }}>
             <CheckCircleOutlineIcon sx={{ color: inStock ? "green" : "gray" }} />
@@ -106,111 +71,61 @@ export default function ProductDetails() {
             </Typography>
           </Stack>
 
-          <Divider sx={{ my: 2 }} />
+          <Typography sx={{ color: "text.secondary", mb:1 }}>
+            <b style={{ color: "#111827" }}>Price:</b> ${product.price}
+          </Typography>
 
-          <Stack spacing={1} sx={{ mb: 3 }}>
-            <Typography sx={{ color: "text.secondary" }}>
-              <b style={{ color: "#111827" }}>Category:</b> {product.category}
-            </Typography>
+          <Typography sx={{ color: "text.secondary", mb:1}}>
+            <b style={{ color: "#111827" }}>Quantity:</b> {product.quantity}
+          </Typography>
 
-            <Typography sx={{ color: "text.secondary" }}>
-              <b style={{ color: "#111827" }}>Available:</b> {product.quantity}
-            </Typography>
-
-            <Typography sx={{ color: "text.secondary" }}>
-              <b style={{ color: "#111827" }}>Discount:</b> {product.discount}%
-            </Typography>
-          </Stack>
-
-          <Typography sx={{ fontWeight: 700, mb: 1 }}>Description</Typography>
           <Typography sx={{ color: "text.secondary", lineHeight: 1.8, mb: 3 }}>
-            {product.description}
+            <b style={{ color: "#111827" }}>Description:</b> {product.description}
           </Typography>
 
           <Divider sx={{ my: 2 }} />
 
-          <Stack spacing={2.2}>
-            <Typography sx={{ fontWeight: 700 }}>Quantity</Typography>
-
-            <Stack direction="row" spacing={2} alignItems="center">
-
-              <Paper
-                elevation={0}
-                sx={{
-                  border: "1px solid #e5e7eb",
-                  borderRadius: 1.5,
-                  display: "flex",
-                  alignItems: "center",
-                  overflow: "hidden",
-                }}
-              >
-                <Button
-                  disabled={!inStock || qty <= 1}
-                  sx={{ minWidth: 48, color: "#111827" }}
-                >
-                  −
-                </Button>
-
-                <Box sx={{ px: 2.2, minWidth: 52, textAlign: "center", fontWeight: 700 }}>
-                  {qty}
-                </Box>
-
-                <Button
-                  disabled={!inStock || qty >= product.quantity}
-                  sx={{ minWidth: 48, color: "#111827" }}
-                >
-                  +
-                </Button>
-              </Paper>
-
-              <Button
-                variant="outlined"
-                startIcon={<ShoppingCartOutlinedIcon />}
-                sx={{
-                  flex: 1,
-                  py: 1.6,
-                  borderColor: "#111827",
-                  color: "#111827",
-                  fontWeight: 800,
-                  "&:hover": {
-                    bgcolor: "#e11d48" ,
-                    color: "#fff",
-                    borderColor: "#e11d48",
-                  },
-                }}
-              >
-              </Button>
-
-              <IconButton
-                sx={{
-                  border: "1px solid #e5e7eb",
-                  borderRadius: 1.5,
-                  color:"#000",
-                  width: 52,
-                  height: 52,
-                  "&:hover": {color:"#fff", bgcolor: "#e11d48", borderColor: "#e11d48"},
-                }}
-              >
-                <FavoriteBorderIcon />
-              </IconButton>
-            </Stack>
-
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 2, py: 2 }}>
             <Button
-              variant="contained"
+              variant="outlined"
+              startIcon={<ShoppingCartOutlinedIcon />}
+              disabled={!inStock}
               sx={{
-                py: 2,
-                bgcolor: "#111827",
-                fontWeight: 900,
-                "&:hover": { bgcolor: "#000" },
+                minWidth: 200,
+                py: 1.6,
+                borderColor: "#111827",
+                color: "#111827",
+                fontWeight: 800,
+                "&:hover": {
+                  bgcolor: "#e11d48",
+                  color: "#fff",
+                  borderColor: "#e11d48",
+                },
               }}
-              fullWidth
             >
-              Buy It Now
+              Add to Cart
             </Button>
-          </Stack>
+            <IconButton
+              sx={{
+                border: "1px solid #e5e7eb",
+                borderRadius: 1.5,
+                color: "#000",
+                width: 52,
+                height: 52,
+                "&:hover": {
+                  color: "#fff",
+                  bgcolor: "#e11d48",
+                  borderColor: "#e11d48",
+                },
+              }}
+            >
+              <FavoriteBorderIcon />
+            </IconButton>
+          </Box>
         </Box>
       </Box>
     </Container>
   );
 }
+
 
