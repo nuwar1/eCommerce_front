@@ -20,6 +20,9 @@ import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/authStore";
+import { useTranslation } from "react-i18next";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import i18n from "../../i18n"
 
 const SearchWrap = styled("div")(({ theme }) => ({
   display: "flex",
@@ -57,6 +60,7 @@ const navLinkSx = {
 };
 
 export default function Navbar() {
+  const { t } = useTranslation(); 
   const [accountAnchorEl, setAccountAnchorEl] = React.useState(null);
   const isAccountOpen = Boolean(accountAnchorEl);
   const token = useAuthStore(state => state.token);
@@ -85,6 +89,18 @@ export default function Navbar() {
   const openMobileSearch = () => setMobileSearchOpen(true);
   const closeMobileSearch = () => setMobileSearchOpen(false);
 
+  const [langAnchorEl, setLangAnchorEl] = React.useState(null);
+  const isLangOpen = Boolean(langAnchorEl);
+
+  const openLangMenu = (e) => setLangAnchorEl(e.currentTarget);
+  const closeLangMenu = () => setLangAnchorEl(null);
+
+  const changeLang = (lng) => {
+    const newLng = i18n.language === "ar" ? "en" : "ar";
+    i18n.changeLanguage(newLng);
+    closeLangMenu();
+  };
+
   const navItems = [
     { label: "Home", to: "/home" },
     { label: "Shop", to: "/products" },
@@ -95,6 +111,61 @@ export default function Navbar() {
 
   return (
     <AppBar position="sticky" elevation={0}>
+      <Box
+        sx={{
+          bgcolor: "#0b1220",
+          color: "#ffffffd9",
+          borderBottom: "1px solid #ffffff14",
+        }}
+      >
+        <Container maxWidth="xl">
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              py: 0.8,
+              fontSize: 13,
+            }}
+          >
+            <Typography sx={{ fontSize: 13, display: { xs: "none", md: "block" }}}>
+              {t("nav.orderByPhone")}{" "}
+              <Box component="span" sx={{ color: "#fff", fontWeight: 700 }}>
+                (84) 943 446 000
+              </Box>{" "}
+              |{" "}
+              <Box component="span" sx={{ color: "#fff"}}>
+                {t("nav.saleText")}
+              </Box>
+            </Typography>
+
+            <Button
+              onClick={openLangMenu}
+              endIcon={<KeyboardArrowDownIcon />}
+              sx={{
+                color: "rgba(255,255,255,0.9)",
+                textTransform: "none",
+                fontWeight: 600,
+                fontSize: 13,
+                "&:hover": { color: "#fff", bgcolor: "transparent" },
+              }}
+            >
+              {i18n.language === "ar" ? "العربية" : "English"}
+            </Button>
+
+            <Menu
+              anchorEl={langAnchorEl}
+              open={isLangOpen}
+              onClose={closeLangMenu}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              transformOrigin={{ vertical: "top", horizontal: "right" }}
+            >
+              <MenuItem onClick={() => changeLang("en")}>English</MenuItem>
+              <MenuItem onClick={() => changeLang("ar")}>العربية</MenuItem>
+            </Menu>
+          </Box>
+        </Container>
+      </Box>
       <Box sx={{ bgcolor: "#111827", color: "#fff" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ py: 1.5, gap: 2 }}>
@@ -114,7 +185,7 @@ export default function Navbar() {
                   style={{ color: "inherit", textDecoration: "none" }}
                   sx={{ display: { xs: "none", md: "flex" } }}
                 >
-                  welcome {user?.name}
+                  {t("nav.welc")}{" "}{user?.name}
                 </Typography>
               </Box> :
               <Box sx={{ minWidth: 160, display: "flex", justifyContent: "center", alignItems: "center", gap: 2 }}>
@@ -131,7 +202,7 @@ export default function Navbar() {
 
             <Box sx={{ flex: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
               <SearchWrap>
-                <SearchInput placeholder="Search..." />
+                <SearchInput placeholder={t("nav.searchPlaceholder")} />
                 <SearchBtn>
                   <SearchIcon />
                 </SearchBtn>
@@ -174,7 +245,7 @@ export default function Navbar() {
                 startIcon={<PersonOutlineIcon />}
               >
                 <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
-                  Account
+                  {t("nav.account")}
                 </Box>
               </Button>
 
@@ -202,7 +273,7 @@ export default function Navbar() {
                 }
               >
                 <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
-                  Wishlist
+                  {t("nav.wishlist")}
                 </Box>
               </Button>
 
@@ -230,7 +301,7 @@ export default function Navbar() {
                 }
               >
                 <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
-                  Cart
+                  {t("nav.cart")}
                 </Box>
               </Button>
             </Box>
@@ -276,7 +347,7 @@ export default function Navbar() {
                   "&:hover": { bgcolor: "#f3f4f6" },
                 }}
               >
-                All Categories
+                {t("nav.all")}
               </Button>
             </Box>
 
@@ -287,26 +358,26 @@ export default function Navbar() {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: {
-                  md: 0.2,  
-                  lg: 0.5,   
-                  xl: 3,   
+                  md: 0.2,
+                  lg: 0.5,
+                  xl: 3,
                 },
               }}
             >
               <Box component={RouterLink} to="/home" sx={{ ...navLinkSx, color: "#e11d48" }}>
-                Home
+                {t("nav.home")}
               </Box>
               <Box component={RouterLink} to="/products" sx={navLinkSx}>
-                Shop
+                {t("nav.shop")}
               </Box>
               <Box component={RouterLink} to="/pages" sx={navLinkSx}>
-                Pages
+                {t("nav.pages")}
               </Box>
               <Box component={RouterLink} to="/blog" sx={navLinkSx}>
-                Blog
+                {t("nav.blog")}
               </Box>
               <Box component={RouterLink} to="/contact" sx={navLinkSx}>
-                Contact
+                {t("nav.contact")}
               </Box>
             </Box>
 
@@ -329,7 +400,7 @@ export default function Navbar() {
                 ml: { xs: "auto", lg: 0 },
               }}
             >
-              Shop today’s deal
+              {t("nav.deal")}
             </Button>
 
           </Toolbar>
@@ -349,21 +420,21 @@ export default function Navbar() {
               handleAccountClose();
               handleLogout();
             }}>
-            Logout
+            {t("auth.logout")}
           </MenuItem>
           : <MenuItem
             component={RouterLink}
             to="/auth/login"
             onClick={handleAccountClose}
           >
-            Login
+            {t("auth.login")}
           </MenuItem>}
         <MenuItem
           component={RouterLink}
           to="/auth/register"
           onClick={handleAccountClose}
         >
-          Register
+          {t("auth.register")}
         </MenuItem>
       </Menu>
 
@@ -418,7 +489,7 @@ export default function Navbar() {
         anchor="left"
         open={mobileOpen}
         onClose={handleMobileMenu}
-        sx={{ display: { xs: "block", md: "none" }}}
+        sx={{ display: { xs: "block", md: "none" } }}
         slotProps={{
           paper: { sx: { width: 280 } },
         }}

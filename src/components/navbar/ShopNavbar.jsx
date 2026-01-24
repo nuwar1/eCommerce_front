@@ -15,6 +15,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/authStore";
+import { useTranslation } from "react-i18next";
 
 const navLinkSx = {
   color: "#000",
@@ -28,6 +29,7 @@ const navLinkSx = {
 };
 
 export default function ShopNavbar() {
+  const { t } = useTranslation();
   const [accountAnchorEl, setAccountAnchorEl] = React.useState(null);
   const isAccountOpen = Boolean(accountAnchorEl);
   const token = useAuthStore(state => state.token);
@@ -43,11 +45,11 @@ export default function ShopNavbar() {
   const handleMobileMenu = () => setMobileOpen((value) => !value);
 
   const navItems = [
-    { label: "Home", to: "/home" },
-    { label: "Shop", to: "/products" },
-    { label: "Pages", to: "/pages" },
-    { label: "Blog", to: "/blog" },
-    { label: "Contact", to: "/contact" },
+    { key: "home", to: "/home" },
+    { key: "shop", to: "/products" },
+    { key: "pages", to: "/pages" },
+    { key: "blog", to: "/blog" },
+    { key: "contact", to: "/contact" },
   ];
 
   const handleAccountOpen = (event) => setAccountAnchorEl(event.currentTarget);
@@ -98,7 +100,7 @@ export default function ShopNavbar() {
                   to={item.to}
                   sx={navLinkSx}
                 >
-                  {item.label}
+                  {t(`nav.${item.key}`)}
                 </Box>
               ))}
             </Box>
@@ -204,7 +206,7 @@ export default function ShopNavbar() {
                 to={item.to}
                 onClick={handleMobileMenu}
               >
-                <ListItemText primary={item.label} />
+                <ListItemText primary={t(`nav.${item.key}`)} />
               </ListItemButton>
             ))}
           </List>

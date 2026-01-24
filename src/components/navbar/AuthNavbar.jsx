@@ -14,16 +14,18 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link as RouterLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const navItems = [
-    { label: "Home", to: "/home" },
-    { label: "Shop", to: "/products" },
-    { label: "Pages", to: "/pages" },
-    { label: "Blog", to: "/blog" },
-    { label: "Contact", to: "/contact" },
+  { key: "home", to: "/home" },
+  { key: "shop", to: "/products" },
+  { key: "pages", to: "/pages" },
+  { key: "blog", to: "/blog" },
+  { key: "contact", to: "/contact" },
 ];
 
 export default function AuthNavbar() {
+  const {t} = useTranslation();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleMobileMenu = () => setMobileOpen((value) => !value);
 
@@ -60,7 +62,7 @@ export default function AuthNavbar() {
                 underline="none"
                 sx={{ "&:hover": { color: "#e11d48" } }}
               >
-                {item.label}
+                {t(`nav.${item.key}`)}
               </Link>
             ))}
           </Box>
@@ -100,7 +102,7 @@ export default function AuthNavbar() {
                 to={item.to}
                 onClick={handleMobileMenu}
               >
-                <ListItemText primary={item.label} />
+                <ListItemText primary={t(`nav.${item.key}`)} />
               </ListItemButton>
             ))}
           </List>

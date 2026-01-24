@@ -4,6 +4,7 @@ import App from './App.jsx'
 import { CssBaseline } from '@mui/material'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './themes/theme.js'
+import "./i18n.jsx"
 
 createRoot(document.getElementById('root')).render(
     <>

@@ -6,13 +6,15 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import LanguageManager from './utils/LanguageManager'
 
 export default function App() {
   const queryClient = new QueryClient()
   return (
     <QueryClientProvider client={queryClient}>
+      <LanguageManager />
       <ReactQueryDevtools initialIsOpen={false} />
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   )
 }

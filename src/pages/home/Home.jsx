@@ -4,11 +4,14 @@ import { Typography, Container, CircularProgress, Grid, Box, Card, CardMedia, Ca
 import HeroCarousel from "../../components/hero/HeroCarousel";
 import { useProducts } from "../../hooks/useProducts";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
   const { isLoading, isError, data } = useProducts();
   if (isLoading) return <CircularProgress />
   if (isError) return <Typography>error</Typography>
+  
   return (
     <Container maxWidth="xl" sx={{ mt: 0 }}>
       <Box
@@ -33,7 +36,7 @@ export default function Home() {
       </Box>
 
       <Box sx={{ py: 5 }}>
-        <Typography component={"h2"} variant={'h5'} sx={{ py: 3, fontWeight: 500 }}>Products</Typography>
+        <Typography component={"h2"} variant={'h5'} sx={{ py: 3, fontWeight: 500 }}>{t("products.products")}</Typography>
         <Grid container spacing={1}>
           {data.response.data.map((product) =>
             <Grid
