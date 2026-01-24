@@ -10,6 +10,7 @@ import SendCode from "./pages/send-code/SendCode";
 import ShopLayout from "./layout/ShopLayout";
 import ProductDetails from "./pages/product-details/ProductDetails";
 import Products from "./pages/products/Products";
+import ProtectedRouter from "./ProtectedRouter";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,10 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "cart",
-                element: <Cart />
+                element:
+                <ProtectedRouter>
+                    <Cart />
+                </ProtectedRouter>
             },
             {
                 path: "product/:id",

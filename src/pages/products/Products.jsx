@@ -23,7 +23,6 @@ export default function Products() {
             {data.response.data.map((product) => (
               <Grid
                 key={product.id}
-                item
                 size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
               >
                 <Link

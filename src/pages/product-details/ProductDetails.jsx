@@ -8,7 +8,7 @@ import {
   IconButton,
   Divider,
   Paper,
-  CircularProgress, 
+  CircularProgress,
   Rating
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -16,14 +16,17 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
+import useAddToCart from "../../hooks/useAddToCart";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const { isLoading, isError, data } = useProduct(id);
+  const { mutate: addToCart, isLoading: isAddingToCart } = useAddToCart();
   if (isLoading) return <CircularProgress />
   if (isError) return <Typography>error</Typography>
   const product = data.response;
-  const inStock = product.quantity > 0;
+  const quantityNum = Number(product.quantity ?? 0);
+  const inStock = quantityNum > 0;
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
@@ -71,11 +74,11 @@ export default function ProductDetails() {
             </Typography>
           </Stack>
 
-          <Typography sx={{ color: "text.secondary", mb:1 }}>
+          <Typography sx={{ color: "text.secondary", mb: 1 }}>
             <b style={{ color: "#111827" }}>Price:</b> ${product.price}
           </Typography>
 
-          <Typography sx={{ color: "text.secondary", mb:1}}>
+          <Typography sx={{ color: "text.secondary", mb: 1 }}>
             <b style={{ color: "#111827" }}>Quantity:</b> {product.quantity}
           </Typography>
 
@@ -101,6 +104,9 @@ export default function ProductDetails() {
                   color: "#fff",
                   borderColor: "#e11d48",
                 },
+              }}
+              onClick={() => {
+                addToCart({ ProductId: product.id, Count: 1 });
               }}
             >
               Add to Cart

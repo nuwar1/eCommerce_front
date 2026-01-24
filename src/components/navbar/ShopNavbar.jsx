@@ -13,7 +13,8 @@ import Divider from "@mui/material/Divider";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/authStore";
 
 const navLinkSx = {
   color: "#000",
@@ -29,6 +30,14 @@ const navLinkSx = {
 export default function ShopNavbar() {
   const [accountAnchorEl, setAccountAnchorEl] = React.useState(null);
   const isAccountOpen = Boolean(accountAnchorEl);
+  const token = useAuthStore(state => state.token);
+  const logout = useAuthStore(state => state.logout);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/auth/login");
+  }
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleMobileMenu = () => setMobileOpen((value) => !value);
@@ -66,7 +75,7 @@ export default function ShopNavbar() {
               sx={{
                 display: { xs: "inline-flex", md: "none" },
                 color: "#000",
-                ml: "auto", 
+                ml: "auto",
                 "&:hover": { color: "#e11d48", backgroundColor: "transparent" },
               }}
             >
@@ -79,7 +88,7 @@ export default function ShopNavbar() {
                 display: { xs: "none", md: "flex" },
                 alignItems: "center",
                 justifyContent: "center",
-                gap: { md: 0.5, lg: 1.5 }, 
+                gap: { md: 0.5, lg: 1.5 },
               }}
             >
               {navItems.map((item) => (
@@ -150,9 +159,21 @@ export default function ShopNavbar() {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <MenuItem component={RouterLink} to="/auth/login" onClick={handleAccountClose}>
-          Login
-        </MenuItem>
+        {token != null ?
+          <MenuItem color="inherit"
+            onClick={() => {
+              handleAccountClose();
+              handleLogout();
+            }}>
+            Logout
+          </MenuItem>
+          : <MenuItem
+            component={RouterLink}
+            to="/auth/login"
+            onClick={handleAccountClose}
+          >
+            Login
+          </MenuItem>}
         <MenuItem component={RouterLink} to="/auth/register" onClick={handleAccountClose}>
           Register
         </MenuItem>
