@@ -31,7 +31,7 @@ export default function Login() {
               textDecorationColor: "#d52345",
             }
           }}>Forgot your password?</Link>
-          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt: 2, gap: {xs: 1.5, sm: 2, md: 3}}}>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 2, gap: {xs: 1.5, sm: 2, md: 3}}}>
             <Button variant='contained' type="submit" fullWidth size='large' sx={{
               py: 3,
               fontSize: {sm: 16, md: 20},

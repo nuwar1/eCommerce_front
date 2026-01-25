@@ -42,7 +42,7 @@ export default function ResetPassword() {
           <TextField label="New Password" {...register("newPassword")} variant="outlined"
             error={errors.newPassword} helperText={errors.newPassword?.message} />
 
-          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt: 2,  gap: {xs: 1.5, sm: 2, md: 3}}}>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 2,  gap: {xs: 1.5, sm: 2, md: 3}}}>
             <Button variant="contained" type="submit"
               disabled={isSubmitting} fullWidth
               size="large" sx={{

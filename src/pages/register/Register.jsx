@@ -31,7 +31,7 @@ export default function Register() {
           <TextField label="Email" {...register('email')} variant="outlined" error={errors.email} helperText={errors.email?.message}/>
           <TextField label="Password" {...register('password')} variant="outlined" error={errors.password} helperText={errors.password?.message}/>
           <TextField label="Phone Number" {...register('phoneNumber')} variant="outlined" error={errors.phoneNumber} helperText={errors.phoneNumber?.message}/>
-          <Box sx={{ display: "flex", gap: 3, justifyContent: "center", mt:2, gap: {xs: 1.5, sm: 2, md: 3}}}>
+          <Box sx={{ display: "flex", justifyContent: "center", mt:2, gap: {xs: 1.5, sm: 2, md: 3}}}>
             <Button variant='contained' type="submit" disabled={isSubmitting} fullWidth size='large' sx={{
               py: 3,
               fontSize: "1.4rem",

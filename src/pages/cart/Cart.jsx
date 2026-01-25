@@ -2,11 +2,12 @@ import React from 'react'
 import useCart from '../../hooks/useCart';
 import { CircularProgress, TableContainer, Typography, Table, TableCell, TableHead, TableBody, TableRow, Button, Container, Paper, Stack, Box } from '@mui/material';
 import useRemoveFromCart from '../../hooks/useRemoveFromCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useUpdateCartItem from '../../hooks/useUpdateCartItem';
 
 export default function Cart() {
   const { data, isError, isLoading } = useCart();
+  const navigate = useNavigate();
   const { mutate: removeItem, isPending } = useRemoveFromCart();
   const { mutate: updateItem, isPending: updateItemPending } = useUpdateCartItem();
   if (isLoading) return <CircularProgress />
@@ -54,11 +55,14 @@ export default function Cart() {
   }
   console.log(data);
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
+    <Container maxWidth="xl" sx={{ py: 4}}>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
+          flexDirection: "column",   
+          alignItems: "center",
+          gap: 3,
         }}
       >
         <TableContainer>
@@ -115,7 +119,7 @@ export default function Cart() {
                   </TableCell>
                   <TableCell align="center">${item.totalPrice}</TableCell>
                   <TableCell align="center">
-                    <Button color='error' variant='outlined'
+                    <Button color='error' variant='outlined' sx={{fontSize: {xs: 12, md: 16},}}
                       onClick={() => removeItem(item.productId)}>Remove</Button>
                   </TableCell>
                 </TableRow>
@@ -132,6 +136,47 @@ export default function Cart() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: {xs: 1, sm: 2, md: 3} }}>
+          <Button
+            variant="contained"
+            sx={{
+              fontSize: {xs: 12, md: 16},
+              minWidth: 150,
+              py: 1.6,
+              borderColor: "#111827",
+              bgcolor: "#111827",
+              color: "#fff",
+              fontWeight: 800,
+              "&:hover": {
+                bgcolor: "#e11d48",
+                color: "#fff",
+                borderColor: "#e11d48",
+              },
+            }}
+            onClick={()=>navigate("/checkout")}
+          >
+            Checkout
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{
+              fontSize: {xs: 12, md: 16},
+              minWidth: 150,
+              py: 1.6,
+              borderColor: "#111827",
+              color: "#111827",
+              fontWeight: 800,
+              "&:hover": {
+                bgcolor: "#e11d48",
+                color: "#fff",
+                borderColor: "#e11d48",
+              },
+            }}
+            onClick={()=>navigate("/products")}
+          >
+            Continue Shopping
+          </Button>
+        </Box>
       </Box>
     </Container>
   )
