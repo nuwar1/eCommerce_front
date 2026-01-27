@@ -5,13 +5,15 @@ import HeroCarousel from "../../components/hero/HeroCarousel";
 import { useProducts } from "../../hooks/useProducts";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import DealsSection from "../../components/deals-section/DealsSection";
+import Brands from "../../components/brands/Brands";
 
 export default function Home() {
   const { t } = useTranslation();
   const { isLoading, isError, data } = useProducts();
   if (isLoading) return <CircularProgress />
   if (isError) return <Typography>error</Typography>
-  
+
   return (
     <Container maxWidth="xl" sx={{ mt: 0 }}>
       <Box
@@ -81,6 +83,14 @@ export default function Home() {
               </Link>
             </Grid>)}
         </Grid>
+      </Box>
+
+      <Box>
+        <DealsSection />
+      </Box>
+
+      <Box>
+        <Brands />
       </Box>
     </Container>
   );
