@@ -161,23 +161,38 @@ export default function ShopNavbar() {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        {token != null ?
-          <MenuItem color="inherit"
-            onClick={() => {
-              handleAccountClose();
-              handleLogout();
-            }}>
-            Logout
-          </MenuItem>
-          : <MenuItem
+        {token != null ? 
+          [
+            <MenuItem
+              component={RouterLink}
+              to="/profile"
+              onClick={handleAccountClose}
+            >
+              {t("nav.profile")}
+            </MenuItem>,
+            <MenuItem
+              onClick={() => {
+                handleAccountClose();
+                handleLogout();
+              }}
+            >
+              {t("auth.logout")}
+            </MenuItem>
+          ] : (
+          <MenuItem
             component={RouterLink}
             to="/auth/login"
             onClick={handleAccountClose}
           >
-            Login
-          </MenuItem>}
-        <MenuItem component={RouterLink} to="/auth/register" onClick={handleAccountClose}>
-          Register
+            {t("auth.login")}
+          </MenuItem>
+        )}
+        <MenuItem
+          component={RouterLink}
+          to="/auth/register"
+          onClick={handleAccountClose}
+        >
+          {t("auth.register")}
         </MenuItem>
       </Menu>
 

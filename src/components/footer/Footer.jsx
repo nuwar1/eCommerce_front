@@ -34,7 +34,7 @@ export default function Footer() {
     >
       <Container maxWidth="xl">
         <Grid container spacing={4} justifyContent="space-between">
-          <Grid item xs={12} md={3}>
+          <Grid size={{xs:12, md:3}}>
             <Typography
               sx={{
                 fontWeight: 900,
@@ -58,7 +58,7 @@ export default function Footer() {
             </Link>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={2}>
+          <Grid size={{xs:12, sm:6, md:2}}>
             <Typography sx={{
               fontWeight: 800,
               color: "#fff",
@@ -95,7 +95,7 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={2}>
+          <Grid size={{xs:12, sm:6, md:2}}>
             <Typography sx={{
               fontWeight: 800,
               color: "#fff",
@@ -131,7 +131,7 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={2}>
+          <Grid size={{xs:12, sm:6, md:2}}>
             <Typography sx={{
               fontWeight: 800,
               color: "#fff",
@@ -162,7 +162,7 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid size={{xs:12, sm:6, md:3}}>
             <Typography sx={{ fontWeight: 900, fontSize: 18, mb: 2 }}>
               Join Our Newsletter And Get $50 <br />
               Discount For Your First Order
@@ -172,7 +172,7 @@ export default function Footer() {
               fullWidth
               placeholder="Sign Up Newsletter"
               variant="outlined"
-              SlotProps={{
+              slotProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton aria-label="subscribe" sx={{ color: "#fff" }}>

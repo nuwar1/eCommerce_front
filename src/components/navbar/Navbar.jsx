@@ -481,21 +481,32 @@ export default function Navbar() {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        {token != null ?
-          <MenuItem color="inherit"
-            onClick={() => {
-              handleAccountClose();
-              handleLogout();
-            }}>
-            {t("auth.logout")}
-          </MenuItem>
-          : <MenuItem
+        {token != null ? 
+          [
+            <MenuItem
+              component={RouterLink}
+              to="/profile"
+              onClick={handleAccountClose}
+            >
+              {t("nav.profile")}
+            </MenuItem>,
+            <MenuItem
+              onClick={() => {
+                handleAccountClose();
+                handleLogout();
+              }}
+            >
+              {t("auth.logout")}
+            </MenuItem>
+          ]: (
+          <MenuItem
             component={RouterLink}
             to="/auth/login"
             onClick={handleAccountClose}
           >
             {t("auth.login")}
-          </MenuItem>}
+          </MenuItem>
+        )}
         <MenuItem
           component={RouterLink}
           to="/auth/register"

@@ -22,7 +22,8 @@ i18n
                         searchPlaceholder: "Search...",
                         all: "All Categories",
                         orderByPhone: "Order by phone:",
-                        saleText: "Shop our Spring Bounty Sale"
+                        saleText: "Shop our Spring Bounty Sale",
+                        profile: "Profile"
                     },
 
                     hero: {
@@ -99,7 +100,8 @@ i18n
                         searchPlaceholder: "ابحث...",
                         all: "جميع الفئات",
                         orderByPhone: "اطلب عبر الهاتف:",
-                        saleText: "تسوق عروض الربيع"
+                        saleText: "تسوق عروض الربيع",
+                        profile: "الملف الشخصي"
                     },
 
                     hero: {
