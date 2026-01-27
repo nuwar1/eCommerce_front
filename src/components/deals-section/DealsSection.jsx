@@ -54,7 +54,6 @@ export default function DealsSection() {
                     sx={{
                         borderRadius: 3,
                         overflow: "hidden",
-                        bgcolor: "#fff",
                     }}
                 >
                     <Box

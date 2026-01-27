@@ -1,8 +1,15 @@
 import { createTheme } from "@mui/material/styles";
 
-export const theme = createTheme({
-    typography: {
-        fontFamily: "'Albert Sans', sans-serif",
-        fontSize: 16
-    },
-})
+const getTheme = (mode) => {
+    return createTheme({
+        palette: {
+            mode: mode
+        },
+        typography: {
+            fontFamily: "'Albert Sans', sans-serif",
+            fontSize: 16
+        },
+    })
+}
+export default getTheme;
+

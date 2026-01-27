@@ -13,7 +13,6 @@ export default function Categories() {
     <Paper
       elevation={0}
       sx={{
-        bgcolor: "#fff",
         border: "1px solid #e5e7eb",
         borderRadius: "0 0 12px 12px",
         overflow: "hidden",
