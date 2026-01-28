@@ -30,22 +30,28 @@ export default function Home() {
           alignItems: "start",
         }}
       >
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
-          <Categories />
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <Categories />
+          </Box>
+
+          <Box sx={{ mt: { xs: 2, md: 3 } }}>
+            <Box sx={{ display: { xs: "block", md: "none" } }}>
+              <Categories />
+            </Box>
+
+            <HeroCarousel />
+          </Box>
         </Box>
-        <Box sx={{ mt: { xs: 2, md: 3 } }}>
-          <HeroCarousel />
+
+
+        <Box>
+          <Typography component={"h2"} variant={'h5'} sx={{ pt: 3, fontWeight: 500 }}>{t("products.products")}</Typography>
+          <ProductsSection />
         </Box>
-      </Box>
 
-      <Box>
-        <Typography component={"h2"} variant={'h5'} sx={{ pt: 3, fontWeight: 500 }}>{t("products.products")}</Typography>
-        <ProductsSection />
-      </Box>
+        <DealsSection />
 
-      <DealsSection />
-
-      <Brands />
+        <Brands />
 
     </Container>
   );
