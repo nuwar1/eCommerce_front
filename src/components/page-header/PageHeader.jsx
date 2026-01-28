@@ -15,11 +15,11 @@ export default function PageHeader({ title, crumbs }) {
       }}
     >
       <Typography
-        variant="h3"
+        variant="h4"
         sx={{
           fontWeight: 600,
           mb: 1.5,
-          fontSize: { xs: 28, sm: 36, md: 48 },         
+          fontSize: { xs: 28, sm: 36, md: 40 },         
         }}
       >
         {title}

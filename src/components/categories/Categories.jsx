@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../API/axiosInstance";
 import { Paper, List, ListItemButton, ListItemText, Box, Typography, CircularProgress } from "@mui/material";
 import { useCategories } from "../../hooks/useCategories";
+import { Link } from "react-router-dom";
 
 export default function Categories() {
-  const {isLoading, isError, data} = useCategories();
-  if (isLoading) return <CircularProgress/>
-  if(isError) return <Typography>error</Typography>
+  const { isLoading, isError, data } = useCategories();
+  if (isLoading) return <CircularProgress />
+  if (isError) return <Typography>error</Typography>
 
   return (
     <Paper
@@ -21,6 +22,8 @@ export default function Categories() {
         {data.response.map((category) => (
           <ListItemButton
             key={category.id}
+            component={Link}
+            to={`/category/${category.id}`}
             sx={{
               py: 1.4,
               px: 2,
