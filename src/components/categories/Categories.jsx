@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../API/axiosInstance";
 import { Paper, List, ListItemButton, ListItemText, Box, Typography, CircularProgress } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import { useCategories } from "../../hooks/useCategories";
 
 export default function Categories() {

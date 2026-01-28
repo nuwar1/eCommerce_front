@@ -17,8 +17,10 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import useAddToCart from "../../hooks/useAddToCart";
+import ReviewsSection from "../../components/reviews/ReviewsSection";
 
 export default function ProductDetails() {
+  const [expanded, setExpanded] = React.useState(false);
   const { id } = useParams();
   const { isLoading, isError, data } = useProduct(id);
   const { mutate: addToCart, isPending: isAddingToCart } = useAddToCart();
@@ -27,6 +29,7 @@ export default function ProductDetails() {
   const product = data.response;
   const quantityNum = Number(product.quantity ?? 0);
   const inStock = quantityNum > 0;
+  
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
@@ -82,9 +85,22 @@ export default function ProductDetails() {
             <b style={{ color: "#111827" }}>Quantity:</b> {product.quantity}
           </Typography>
 
-          <Typography sx={{ color: "text.secondary", lineHeight: 1.8, mb: 3 }}>
-            <b style={{ color: "#111827" }}>Description:</b> {product.description}
-          </Typography>
+          <Box>
+            <Typography sx={{
+              color: "text.secondary", mb: 3, display: "-webkit-box",
+              WebkitLineClamp: expanded ? "none" : 5,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}>
+              <b style={{ color: "#111827" }}>Description:</b> {product.description}
+            </Typography>
+            <Button
+              onClick={() => setExpanded(!expanded)}
+              sx={{ mt: 1, p: 0, textTransform: "none", fontWeight: 700, color:"#000" }}
+            >
+              {expanded ? "Show less" : "Read more"}
+            </Button>
+          </Box>
 
           <Divider sx={{ my: 2 }} />
 
@@ -129,6 +145,9 @@ export default function ProductDetails() {
             </IconButton>
           </Box>
         </Box>
+      </Box>
+      <Box component="section" sx={{ py: 5 }}>
+        <ReviewsSection />
       </Box>
     </Container>
   );
