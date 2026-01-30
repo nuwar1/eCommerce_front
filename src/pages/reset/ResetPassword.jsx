@@ -22,7 +22,7 @@ export default function ResetPassword() {
   return (
     <Container maxWidth="md">
       <Box className="register-form">
-        <Typography variant="h3" component="h1" sx={{ textAlign: "center", mt: 5 }}>
+        <Typography variant="h3" component="h1" sx={{ textAlign: "center", mt: 5, fontSize: {xs:40, md: 60}  }}>
           Reset Password
         </Typography>
 
@@ -47,7 +47,7 @@ export default function ResetPassword() {
               disabled={isSubmitting} fullWidth
               size="large" sx={{
                 py: 3,
-                fontSize: {sm: 16, md: 20},
+                fontSize: {xs: 16, md: 20},
                 backgroundColor: "#000",
                 color: "#fff",
                 "&:hover": { backgroundColor: "#d52345" },
@@ -58,7 +58,7 @@ export default function ResetPassword() {
               fullWidth size="large"
               sx={{
                 py: 3,
-                fontSize: {sm: 16, md: 20},
+                fontSize: {xs: 16, md: 20},
                 borderColor: "#000",
                 color: "#000",
                 "&:hover": {

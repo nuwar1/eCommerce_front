@@ -13,22 +13,22 @@ import offer4Imaage from "../../assets/images/Offer_4_636x848.webp"
 
 const offers = [
     {
-        title: "Save up to 25%\nonfurniture items",
+        title: "Save up to 25% on\n  furniture items",
         desc: "Here is your chance to upgrade...",
         img: offer1Imaage,
     },
     {
-        title: "Save up to $69 on\nselectperfume items",
+        title: "Save up to $69 on\n selected perfume items",
         desc: "Here is your chance to upgrade...",
         img: offer2Imaage,
     },
     {
-        title: "Save up to 30% onaudio\nitems",
+        title: "Save up to 30% on\n audio items",
         desc: "Here is your chance to upgrade...",
         img: offer3Imaage,
     },
     {
-        title: "Save up to $40 on\nselectcellphone & tablet",
+        title: "Save up to $40 on\n selectced phones & tablets",
         desc: "Here is your chance to upgrade...",
         img: offer4Imaage,
     },

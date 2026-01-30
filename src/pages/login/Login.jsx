@@ -20,7 +20,7 @@ export default function Login() {
           </Typography>
         ))}
       <Box className="register-form">
-        <Typography variant='h3' component="h1" sx={{ textAlign: "center", mt: 5 }}>Sign In</Typography>
+        <Typography variant='h3' component="h1" sx={{ textAlign: "center", mt: 5, fontSize: {xs:40, md: 60} }}>Sign In</Typography>
         <Box onSubmit={handleSubmit(LoginForm)} component={"form"} sx={{ display: "flex", flexDirection: "column", gap: 3, mt: 5 }}>
           <TextField label="Email" {...register('email')} variant="outlined" />
           <TextField label="Password" {...register('password')} variant="outlined" />
@@ -34,7 +34,7 @@ export default function Login() {
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2, gap: {xs: 1.5, sm: 2, md: 3}}}>
             <Button variant='contained' type="submit" fullWidth size='large' sx={{
               py: 3,
-              fontSize: {sm: 16, md: 20},
+              fontSize: {xs: 16, md: 20},
               backgroundColor: "#000",
               color: "#fff",
               "&:hover": {
@@ -43,7 +43,7 @@ export default function Login() {
             }} disabled={loginMutation.isPending}>Sign In</Button>
             <Button component={RouterLink} to="/auth/register" variant='outlined' fullWidth size='large' sx={{
               py: 3,
-              fontSize: {sm:16, md: 20},
+              fontSize: {xs:16, md: 20},
               borderColor: "#000",
               color: "#000",
               "&:hover": {

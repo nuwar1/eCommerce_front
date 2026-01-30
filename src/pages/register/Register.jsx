@@ -20,7 +20,7 @@ export default function Register() {
   return (
     <Container maxWidth="md">
       <Box className="register-form">
-        <Typography variant='h3' component="h1" sx={{ textAlign: "center", mt: 5 }}>Create Account</Typography>
+        <Typography variant='h3' component="h1" sx={{ textAlign: "center", mt: 5, fontSize: {xs:40, md: 60}  }}>Create Account</Typography>
         {serverErrors.length > 0 ? serverErrors.map((err)=>(
           <Typography sx={{color:"red"}}>{err}</Typography>
         ))
@@ -37,7 +37,7 @@ export default function Register() {
               fontSize: "1.4rem",
               backgroundColor: "#000",
               color: "#fff",
-              fontSize: {sm: 16, md: 20},
+              fontSize: {xs: 16, md: 20},
               "&:hover": {
                 backgroundColor: "#d52345",
               },
@@ -47,7 +47,7 @@ export default function Register() {
               fontSize: "1.4rem",
               borderColor: "#000",
               color: "#000",
-              fontSize: {sm: 16, md: 20},
+              fontSize: {xs: 16, md: 20},
               "&:hover": {
                 color:"#fff",
                 borderColor: "#000",

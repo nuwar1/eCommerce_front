@@ -27,7 +27,7 @@ export default function SendCode() {
   return (
     <Container maxWidth="md">
       <Box className="register-form">
-        <Typography variant="h3" component="h1" sx={{ textAlign: "center", mt: 5 }}>
+        <Typography variant="h3" component="h1" sx={{ textAlign: "center", mt: 5, fontSize: {xs:40, md: 60}}}>
           Reset Your Password
         </Typography>
 
@@ -46,7 +46,7 @@ export default function SendCode() {
             <Button variant="contained" type="submit" disabled={isSubmitting} fullWidth
               size="large" sx={{
                 py: 3,
-                fontSize: {sm: 16, md: 20},
+                fontSize: {xs: 16, md: 20},
                 backgroundColor: "#000",
                 color: "#fff",
                 "&:hover": { backgroundColor: "#d52345" },
@@ -56,7 +56,7 @@ export default function SendCode() {
 
             <Button component={Link} to="/auth/login" fullWidth sx={{
               py: 3,
-              fontSize: {sm: 16, md: 20},
+              fontSize: {xs: 16, md: 20},
               color: "#666060ff",
               textDecoration: "underline",
               "&:hover": {
