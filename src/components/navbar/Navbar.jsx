@@ -25,6 +25,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import i18n from "../../i18n"
 import useThemeStore from "../../store/useThemeStore";
 import Switch from "@mui/material/Switch";
+import { useForm } from "react-hook-form";
 
 const SearchWrap = styled("div")(({ theme }) => ({
   display: "flex",
@@ -169,6 +170,19 @@ export default function Navbar() {
 
   const { mode, toggleTheme } = useThemeStore();
 
+  const { register, handleSubmit } = useForm({
+    defaultValues: { search: "" },
+  });
+
+  const onSearch = ({ search }) => {
+    const q = (search ?? "").trim();
+    if (!q) {
+      navigate("/products");
+      return;
+    }
+    navigate(`/products?search=${encodeURIComponent(q)}`);
+  };
+
   return (
     <AppBar position="sticky" elevation={0}>
       <Box
@@ -268,12 +282,17 @@ export default function Navbar() {
               </Box>}
 
             <Box sx={{ flex: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
-              <SearchWrap>
-                <SearchInput placeholder={t("nav.searchPlaceholder")} />
-                <SearchBtn>
-                  <SearchIcon />
-                </SearchBtn>
-              </SearchWrap>
+              <form onSubmit={handleSubmit(onSearch)} style={{ width: "100%", display: "flex", justifyContent: "center"}}>
+                <SearchWrap>
+                  <SearchInput
+                    {...register("search")}
+                    placeholder={t("nav.searchPlaceholder")}
+                  />
+                  <SearchBtn type="submit">
+                    <SearchIcon />
+                  </SearchBtn>
+                </SearchWrap>
+              </form>
             </Box>
 
             <Box sx={{
@@ -481,7 +500,7 @@ export default function Navbar() {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        {token != null ? 
+        {token != null ?
           [
             <MenuItem
               component={RouterLink}
@@ -498,15 +517,15 @@ export default function Navbar() {
             >
               {t("auth.logout")}
             </MenuItem>
-          ]: (
-          <MenuItem
-            component={RouterLink}
-            to="/auth/login"
-            onClick={handleAccountClose}
-          >
-            {t("auth.login")}
-          </MenuItem>
-        )}
+          ] : (
+            <MenuItem
+              component={RouterLink}
+              to="/auth/login"
+              onClick={handleAccountClose}
+            >
+              {t("auth.login")}
+            </MenuItem>
+          )}
         <MenuItem
           component={RouterLink}
           to="/auth/register"

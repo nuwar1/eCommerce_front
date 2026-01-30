@@ -32,7 +32,7 @@ export default function Brands() {
       <Box>
         <Typography
           component="h2"
-          sx={{ fontWeight: 700, fontSize: { xs: 20, md: 26 }, mb:3}}
+          sx={{ fontWeight: 500, fontSize: { xs: 20, md: 26 }, mb:3}}
         >
           Shop By Brands
         </Typography>

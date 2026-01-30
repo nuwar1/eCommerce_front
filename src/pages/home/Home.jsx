@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import DealsSection from "../../components/deals-section/DealsSection";
 import Brands from "../../components/brands/Brands";
 import ProductsSection from "../products/ProductsSection";
+import OffersSection from "../../components/offers-section/OffersSection";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -50,6 +51,8 @@ export default function Home() {
         </Box>
 
         <DealsSection />
+
+        <OffersSection/>
 
         <Brands />
 
