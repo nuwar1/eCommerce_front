@@ -18,10 +18,12 @@ import { useParams } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import useAddToCart from "../../hooks/useAddToCart";
 import ReviewsSection from "../../components/reviews/ReviewsSection";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductDetails() {
   const [expanded, setExpanded] = React.useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
   const { isLoading, isError, data } = useProduct(id);
   const { mutate: addToCart, isPending: isAddingToCart } = useAddToCart();
   if (isLoading) return <CircularProgress />
@@ -29,7 +31,7 @@ export default function ProductDetails() {
   const product = data.response;
   const quantityNum = Number(product.quantity ?? 0);
   const inStock = quantityNum > 0;
-  
+
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
@@ -96,7 +98,7 @@ export default function ProductDetails() {
             </Typography>
             <Button
               onClick={() => setExpanded(!expanded)}
-              sx={{ mt: 1, p: 0, textTransform: "none", fontWeight: 700, color:"#000" }}
+              sx={{ mt: 1, p: 0, textTransform: "none", fontWeight: 700, color: "#000" }}
             >
               {expanded ? "Show less" : "Read more"}
             </Button>
@@ -104,35 +106,69 @@ export default function ProductDetails() {
 
           <Divider sx={{ my: 2 }} />
 
-          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 2, py: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },   // ✅ stack on mobile
+              alignItems: "stretch",
+              justifyContent: "flex-start",
+              gap: 2,
+              py: 2,
+              width: "100%",
+            }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                fontSize: { xs: 14, md: 16 },
+                py: 1.6,
+                fontWeight: 800,
+                textTransform: "none",
+                bgcolor: "#111827",
+                color: "#fff",
+                borderRadius: 2,
+                width: { xs: "100%", sm: "auto" },        
+                minWidth: { sm: 200 },
+                "&:hover": {
+                  bgcolor: "#e11d48",
+                },
+              }}
+              onClick={() => navigate("/products")}
+            >
+              Continue Shopping
+            </Button>
+
             <Button
               variant="outlined"
               startIcon={<ShoppingCartOutlinedIcon />}
               disabled={!inStock}
               sx={{
-                minWidth: 200,
+                fontSize: { xs: 14, md: 16 },
                 py: 1.6,
+                fontWeight: 800,
+                textTransform: "none",
+                borderRadius: 2,
+                width: { xs: "100%", sm: "auto" },        
+                minWidth: { sm: 200 },
                 borderColor: "#111827",
                 color: "#111827",
-                fontWeight: 800,
                 "&:hover": {
                   bgcolor: "#e11d48",
                   color: "#fff",
                   borderColor: "#e11d48",
                 },
               }}
-              onClick={() => {
-                addToCart({ ProductId: product.id, Count: 1 });
-              }}
+              onClick={() => addToCart({ ProductId: product.id, Count: 1 })}
             >
               Add to Cart
             </Button>
+
             <IconButton
               sx={{
                 border: "1px solid #e5e7eb",
-                borderRadius: 1.5,
+                borderRadius: 2,
                 color: "#000",
-                width: 52,
+                width: { xs: "100%", sm: 52 },            
                 height: 52,
                 "&:hover": {
                   color: "#fff",
@@ -144,6 +180,7 @@ export default function ProductDetails() {
               <FavoriteBorderIcon />
             </IconButton>
           </Box>
+
         </Box>
       </Box>
       <Box component="section" sx={{ py: 5 }}>

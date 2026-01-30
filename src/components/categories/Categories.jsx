@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import axiosInstance from "../../API/axiosInstance";
 import { Paper, List, ListItemButton, ListItemText, Box, Typography, CircularProgress, Card, CardActionArea, Grid } from "@mui/material";
 import { useCategories } from "../../hooks/useCategories";
 import { Link } from "react-router-dom";
@@ -16,14 +14,14 @@ export default function Categories() {
       <Box sx={{ display: { xs: "block", md: "none" }, mb: 2 }}>
         <Grid container spacing={2}>
           {categories.map((category) => (
-            <Grid key={category.id} size={{xs:6, sm:4}}>
+            <Grid key={category.id} size={{ xs: 6, sm: 4 }}>
               <Card
                 variant="outlined"
                 sx={{
                   borderRadius: 2,
                   borderColor: "#e5e7eb",
                   height: "100%",
-                  "&:hover": { borderColor: "#111" },
+                  "&:hover": { borderColor: "#000" },
                 }}
               >
                 <CardActionArea
@@ -38,7 +36,11 @@ export default function Categories() {
                     textAlign: "center",
                   }}
                 >
-                  <Typography sx={{ fontWeight: 800, fontSize: 14, color: "#111827" }}>
+                  <Typography sx={{
+                    fontWeight: 800, fontSize: 14, "&:hover": {
+                      color: "#e11d48",
+                    }
+                  }}>
                     {category.name}
                   </Typography>
                 </CardActionArea>
@@ -48,7 +50,7 @@ export default function Categories() {
         </Grid>
       </Box>
 
-     
+
       <Paper
         elevation={0}
         sx={{

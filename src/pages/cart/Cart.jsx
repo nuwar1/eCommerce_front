@@ -4,9 +4,11 @@ import { CircularProgress, TableContainer, Typography, Table, TableCell, TableHe
 import useRemoveFromCart from '../../hooks/useRemoveFromCart';
 import { Link, useNavigate } from 'react-router-dom';
 import useUpdateCartItem from '../../hooks/useUpdateCartItem';
+import useClearCart from '../../hooks/useClearCart';
 
 export default function Cart() {
   const { data, isError, isLoading } = useCart();
+  const { mutate: clearCart, isPending: isClearingCart } = useClearCart();
   const navigate = useNavigate();
   const { mutate: removeItem, isPending } = useRemoveFromCart();
   const { mutate: updateItem, isPending: updateItemPending } = useUpdateCartItem();
@@ -53,14 +55,13 @@ export default function Cart() {
       updateItem({ productId, count: item.count + 1 })
     }
   }
-  console.log(data);
   return (
-    <Container maxWidth="xl" sx={{ py: 4}}>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
-          flexDirection: "column",   
+          flexDirection: "column",
           alignItems: "center",
           gap: 3,
         }}
@@ -119,7 +120,7 @@ export default function Cart() {
                   </TableCell>
                   <TableCell align="center">${item.totalPrice}</TableCell>
                   <TableCell align="center">
-                    <Button color='error' variant='outlined' sx={{fontSize: {xs: 12, md: 16},}}
+                    <Button color='error' variant='outlined' sx={{ fontSize: { xs: 12, md: 16 }}}
                       onClick={() => removeItem(item.productId)}>Remove</Button>
                   </TableCell>
                 </TableRow>
@@ -131,16 +132,26 @@ export default function Cart() {
                 <TableCell align="center">
                   Cart Total: ${data.cartTotal}
                 </TableCell>
-                <TableCell />
+                <TableCell align="center">
+                  <Button
+                    variant="contained" 
+                    color="error"
+                    sx={{ fontSize: { xs: 12, md: 16 }}}
+                    disabled={isClearingCart}
+                    onClick={() => clearCart()}
+                  >
+                    {isClearingCart ? "Clearing..." : "Clear cart"}
+                  </Button>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: {xs: 1, sm: 2, md: 3} }}>
+        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: { xs: 1, sm: 2, md: 3 } }}>
           <Button
             variant="contained"
             sx={{
-              fontSize: {xs: 12, md: 16},
+              fontSize: { xs: 12, md: 16 },
               minWidth: 150,
               py: 1.6,
               borderColor: "#111827",
@@ -153,14 +164,14 @@ export default function Cart() {
                 borderColor: "#e11d48",
               },
             }}
-            onClick={()=>navigate("/checkout")}
+            onClick={() => navigate("/checkout")}
           >
             Checkout
           </Button>
           <Button
             variant="outlined"
             sx={{
-              fontSize: {xs: 12, md: 16},
+              fontSize: { xs: 12, md: 16 },
               minWidth: 150,
               py: 1.6,
               borderColor: "#111827",
@@ -172,7 +183,7 @@ export default function Cart() {
                 borderColor: "#e11d48",
               },
             }}
-            onClick={()=>navigate("/products")}
+            onClick={() => navigate("/products")}
           >
             Continue Shopping
           </Button>
