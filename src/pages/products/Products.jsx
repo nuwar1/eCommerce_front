@@ -253,7 +253,7 @@ export default function Products() {
               },
             }}
           >
-            <Stack spacing={1.5}>
+            <Stack spacing={1.5} sx={{p:2}}>
               <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <Typography sx={{ fontWeight: 900, fontSize: 18 }}>Filters</Typography>
               </Box>
