@@ -7,7 +7,8 @@ export default function Categories() {
   if (isLoading) return <CircularProgress />
   if (isError) return <Typography>error</Typography>
 
-  const categories = data.response;
+  const categories = data.response.data;
+  console.log(categories);
 
   return (
     <>

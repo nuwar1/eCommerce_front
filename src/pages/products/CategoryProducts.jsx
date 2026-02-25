@@ -15,7 +15,8 @@ export default function CategoryProducts() {
     if (isError) return <Typography>Error</Typography>;
 
     const product = data.response;
-    const category = categoryData.response.find((c) => c.id === Number(id));
+    const categories = categoryData.response.data || [];
+    const category = categories.find((c) => c.id === Number(id));
     const categoryName = category.name;
 
     return (
